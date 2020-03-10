@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Quotes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+    <div class="jumbotron text-center">
+
+
+        <h1>Ye and Ron Dropping Knowledge</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div style="col-sm">
+                <input type="button" onclick="getAKanyeQuote();" value="Kanye Quotes">
+            </div>
+            <div style="col-sm">&nbsp;</div>
+            <div style="col-sm">
+            </div>
+        </div>
+        <div>
+            <hr>
+            <p id="YeQuote"> </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div style="col-sm">
+                <input type="button" onclick="getARonQuote();" value="Ron Swanson Quotes">
+            </div>
+            <div style="col-sm">&nbsp;</div>
+            <div style="col-sm">
+            </div>
+        </div>
+        <div>
+            <hr>
+            <p id="RonQuote"> </p>
+        </div>
+    </div>
+
+
+    <script>
+        function getAKanyeQuote() {
+            fetch('https://api.kanye.rest/', {
+                    headers: new Headers({
+                        'Accept': 'application/json'
+                    })
+                })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((myJson) => {
+                    console.log(myJson);
+                    let p = document.getElementById('YeQuote')
+                    p.innerHTML = myJson.quote + "<br>";
+                });
+        }
+
+    </script>
+
+    <script>
+        function getARonQuote() {
+            fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes', {
+                    headers: new Headers({
+                        'Accept': 'application/json'
+                    })
+                })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((myJson) => {
+                    console.log(myJson);
+                    let p = document.getElementById('RonQuote')
+                    p.innerHTML = myJson[0] + "<br>";
+                });
+        }
+
+    </script>
+    <p><img src="ye.webp" style="float:left;width:450px;height:250px;">
+    </p>
+    <p><img src="ron.webp" style="float:right;width:450px;height:250px;">
+    </p>
+
+
+
+</body>
+
+</html>
